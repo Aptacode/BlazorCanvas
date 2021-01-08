@@ -35,10 +35,6 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
     packagesToPack: '$(project)'
     nobuild: true
-    versioningScheme: 'byBuildNumber'
-    majorVersion: '1'
-    minorVersion: '0'
-    patchVersion: '3'
 
 - task: NuGetCommand@2
   displayName: 'Push'
