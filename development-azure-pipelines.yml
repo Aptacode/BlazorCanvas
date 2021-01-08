@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- Production
+- Development
 
 pool:
   vmImage: 'windows-latest'
@@ -35,6 +35,10 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
     packagesToPack: '$(project)'
     nobuild: true
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: '3'
 
 - task: NuGetCommand@2
   displayName: 'Push'
