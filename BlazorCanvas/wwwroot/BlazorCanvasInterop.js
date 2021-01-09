@@ -148,7 +148,7 @@ function wrapText(text, params) {
         lines.push(line);
     }
 
-    var y = dimensions[1] - maxHeight / 2;
+    var y = dimensions[1] - (lines.length / 2);
     for (var n = 0; n < lines.length; n++) {
         ctx.fillText(lines[n], x, y+=lineHeight);
     }
