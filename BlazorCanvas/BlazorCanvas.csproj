@@ -4,9 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>Aptacode.BlazorCanvas</AssemblyName>
     <RootNamespace>Aptacode.BlazorCanvas</RootNamespace>
+    <LangVersion>9.0</LangVersion>
+    <Authors>Aptacode</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Timothy Jones</Authors>
-    <Company>Aptacode</Company>
+    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1</FileVersion>
   </PropertyGroup>
 
   
