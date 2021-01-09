@@ -124,22 +124,32 @@ function wrapText(text, params) {
     var maxHeight = dimensions[3];
     var lineHeight = dimensions[4];
 
+    var lines = [];
+    var hasOverflow = false;
     for (var n = 0; n < words.length; n++) {
         var testLine = line + words[n] + ' ';
         var metrics = ctx.measureText(testLine);
         var testWidth = metrics.width;
         if (testWidth > maxWidth && n > 0) {
-            ctx.fillText(line, x, y);
+            lines.push(line);
             line = words[n] + ' ';
             y += lineHeight;
-        }
-        else {
+        } else {
             line = testLine;
         }
 
         if (y - dimensions[1] > maxHeight - lineHeight) {
-            return;
+            hasOverflow = true;
+            break;
         }
     }
-    ctx.fillText(line, x, y);
+
+    if (!hasOverflow) {
+        lines.push(line);
+    }
+
+    var y = dimensions[1] - maxHeight / 2;
+    for (var n = 0; n < lines.length; n++) {
+        ctx.fillText(lines[n], x, y+=lineHeight);
+    }
 }
