@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -41,6 +42,43 @@ namespace Aptacode.BlazorCanvas
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<float[], object>("ellipse",
                 new[] { x, y, radiusX, radiusY, rotation, startAngle, endAngle });
+        }
+
+        public void Polygon(Vector2[] vertices)
+        {
+            var floats = new float[vertices.Length * 2];
+            var floatCount = 0;
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                var vertex = vertices[i];
+                floats[floatCount++] = vertex.X;
+                floats[floatCount++] = vertex.Y;
+            }
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<float[], object>("polygon",
+                floats);
+        }
+
+        public void PolyLine(Vector2[] vertices)
+        {
+            var floats = new float[vertices.Length * 2];
+            var floatCount = 0;
+            for(int i = 0; i < vertices.Length; i++)
+            {
+                var vertex = vertices[i];
+                floats[floatCount++] = vertex.X;
+                floats[floatCount++] = vertex.Y;
+            }
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<float[], object>("polyline",
+                floats);
+        }
+
+        public void FillRect(float x, float y, float width, float height)
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<float[], object>("fillRect", new[] { x, y, width, height });
+        }
+        public void StrokeRect(float x, float y, float width, float height)
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<float[], object>("strokeRect", new[] { x, y, width, height });
         }
 
         public void ClearRect(float x, float y, float width, float height)

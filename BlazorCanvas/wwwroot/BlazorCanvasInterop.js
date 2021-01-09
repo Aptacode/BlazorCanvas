@@ -25,6 +25,11 @@ function fillRect(params) {
     ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[3]);
 }
 
+function strokeRect(params) {
+    const dimensions = toFloatArray(params);
+    ctx.strokeRect(dimensions[0], dimensions[1], dimensions[2], dimensions[3]);
+}
+
 function ellipse(params) {
     const dimensions = toFloatArray(params);
     ctx.ellipse(dimensions[0], dimensions[1], dimensions[2], dimensions[3], dimensions[4], dimensions[5], dimensions[6]);
@@ -54,6 +59,27 @@ function moveTo(params) {
 function lineTo(params) {
     const dimensions = toFloatArray(params);
     ctx.lineTo(dimensions[0], dimensions[1]);
+}
+
+function polyline(params) {
+    const vertices = toFloatArray(params);
+    ctx.beginPath();
+
+    ctx.moveTo(vertices[0], vertices[1]);
+    for (i = 2; i < vertices.length; i += 2) {
+        ctx.lineTo(vertices[i], vertices[i+1]);
+    }
+}
+
+function polygon(params) {
+    const vertices = toFloatArray(params);
+    ctx.beginPath();
+
+    ctx.moveTo(vertices[0], vertices[1]);
+    for (i = 2; i < vertices.length; i += 2) {
+        ctx.lineTo(vertices[i], vertices[i + 1]);
+    }
+    ctx.closePath();
 }
 
 function fillStyle(param) {

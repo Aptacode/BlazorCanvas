@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mime;
+using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
@@ -38,10 +39,10 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.FillText("Text", 150, 30);
 
             //Text
-            ctx.TextAlign("center");
+            ctx.TextAlign("left");
             ctx.FillStyle("black");
-            ctx.Font("12pt Calibri");
-            ctx.WrapText("Space is big. You just won't believe how vastly, hugely, mind-bogglingly big it is. I mean, you may think it's a long way down the road to the chemist's, but that's just peanuts to space.", 200, 60, 200, 25, 25);
+            ctx.Font("10pt Calibri");
+            ctx.WrapText("Space is big. You just won't believe how vastly, hugely, mind-bogglingly big it is. I mean, you may think it's a long way down the road to the chemist's, but that's just peanuts to space.", 150, 60, 300, 50, 15);
 
             //Path
             ctx.StrokeStyle("black");
@@ -52,6 +53,11 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.LineTo(90, 130);
             ctx.Stroke();
 
+            //Polyline Fast
+            ctx.FillStyle("gray");
+            ctx.PolyLine(new Vector2[] { new(150, 200), new(130, 230), new(240, 240) });
+            ctx.Stroke();
+
             //Polygon
             ctx.FillStyle("gray");
             ctx.BeginPath();
@@ -59,6 +65,12 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.LineTo(30, 150);
             ctx.LineTo(60, 150);
             ctx.ClosePath();
+            ctx.Stroke();
+            ctx.Fill();
+
+            //Polygon Fast
+            ctx.FillStyle("gray");
+            ctx.Polygon(new Vector2[]{ new(100,100), new (120, 120), new (100, 120)});
             ctx.Stroke();
             ctx.Fill();
 
