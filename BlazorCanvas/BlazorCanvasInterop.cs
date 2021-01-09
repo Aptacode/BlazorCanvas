@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -85,6 +86,16 @@ namespace Aptacode.BlazorCanvas
         public void FillText(string text, float x, float y)
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("fillText", text, new[] { x, y });
+        }
+        
+        public void Font(string font)
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<string, object>("font", font);
+        }
+        
+        public void WrapText(string text, float x, float y, float maxWidth, float maxHeight, float lineHeight)
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("wrapText", text, new[] { x, y, maxWidth, maxHeight, lineHeight });
         }
     }
 }

@@ -76,8 +76,44 @@ function textAlign(param) {
     ctx.textAlign = alignment;
 }
 
+function font(text) {
+    const content = BINDING.conv_string(text);
+    ctx.font = content;
+}
+
 function fillText(text, params) {
     const content = BINDING.conv_string(text);
     const dimensions = toFloatArray(params);
     ctx.fillText(content, dimensions[0], dimensions[1]);
+}
+
+function wrapText(text, params) {
+    var words = BINDING.conv_string(text).split(' ');
+    const dimensions = toFloatArray(params);
+
+    var line = '';
+    var x = dimensions[0];
+    var y = dimensions[1];
+    var maxWidth = dimensions[2];
+    var maxHeight = dimensions[3];
+    var lineHeight = dimensions[4];
+
+    for (var n = 0; n < words.length; n++) {
+        var testLine = line + words[n] + ' ';
+        var metrics = ctx.measureText(testLine);
+        var testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+            ctx.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+        }
+        else {
+            line = testLine;
+        }
+
+        if (y - dimensions[1] > maxHeight - lineHeight) {
+            return;
+        }
+    }
+    ctx.fillText(line, x, y);
 }

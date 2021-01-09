@@ -37,6 +37,12 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.FillStyle("black");
             ctx.FillText("Text", 150, 30);
 
+            //Text
+            ctx.TextAlign("center");
+            ctx.FillStyle("black");
+            ctx.Font("12pt Calibri");
+            ctx.WrapText("Space is big. You just won't believe how vastly, hugely, mind-bogglingly big it is. I mean, you may think it's a long way down the road to the chemist's, but that's just peanuts to space.", 200, 60, 200, 25, 25);
+
             //Path
             ctx.StrokeStyle("black");
             ctx.LineWidth(4);
