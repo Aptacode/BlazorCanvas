@@ -10,17 +10,24 @@ A high performance blazor wrapper around the HTML5 Canvas utilizing unmarshalled
 ![last commit](https://img.shields.io/github/last-commit/Aptacode/BlazorCanvas?style=flat-square&cacheSeconds=86000)
 
 ## Usage
+### index.html
+#### Add the Js script
+```html
+<script src="_content/Aptacode.BlazorCanvas/BlazorCanvasInterop.js"></script>
+```
 
 ### Program.cs
 #### Register BlazorCanvas
 ```csharp
   builder.Services.AddSingleton<BlazorCanvasInterop>();
 ```
+
 ### RazorComponent.razor
 #### Setup your canvas element
 ```html
 <canvas @ref="Canvas" width="100" height="100"/>
 ```
+
 ### RazorComponent.razor.cs
 #### Register the canvas with BlazorCanvas
 ```csharp
