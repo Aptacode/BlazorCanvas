@@ -116,6 +116,8 @@ namespace Aptacode.BlazorCanvas
             _jsUnmarshalledRuntime.InvokeUnmarshalled<float[], object>("lineWidth", new[] { defaultBorderThickness });
         }
 
+        #region Text
+
         public void TextAlign(string textAlign)
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, object>("textAlign", textAlign);
@@ -125,15 +127,31 @@ namespace Aptacode.BlazorCanvas
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("fillText", text, new[] { x, y });
         }
-        
+
         public void Font(string font)
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, object>("font", font);
         }
-        
+
         public void WrapText(string text, float x, float y, float maxWidth, float maxHeight, float lineHeight)
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("wrapText", text, new[] { x, y, maxWidth, maxHeight, lineHeight });
         }
+
+        #endregion
+
+        #region Images
+        
+        public async Task LoadImage(string src)
+        {
+            await _jsRuntime.InvokeVoidAsync("loadImage", src);
+        }
+        
+        public void DrawImage(string src, float x, float y)
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("drawImage", src, new[] { x, y });
+        }
+
+        #endregion
     }
 }

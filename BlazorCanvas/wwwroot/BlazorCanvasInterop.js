@@ -97,6 +97,8 @@ function lineWidth(param) {
     ctx.lineWidth = dimensions[0];
 }
 
+//Text
+
 function textAlign(param) {
     const alignment = BINDING.conv_string(param);
     ctx.textAlign = alignment;
@@ -114,25 +116,25 @@ function fillText(text, params) {
 }
 
 function wrapText(text, params) {
-    var words = BINDING.conv_string(text).split(' ');
+    const words = BINDING.conv_string(text).split(" ");
     const dimensions = toFloatArray(params);
 
-    var line = '';
+    var line = "";
     var x = dimensions[0];
     var y = dimensions[1];
-    var maxWidth = dimensions[2];
-    var maxHeight = dimensions[3];
-    var lineHeight = dimensions[4];
+    const maxWidth = dimensions[2];
+    const maxHeight = dimensions[3];
+    const lineHeight = dimensions[4];
 
-    var lines = [];
+    const lines = [];
     var hasOverflow = false;
-    for (var n = 0; n < words.length; n++) {
-        var testLine = line + words[n] + ' ';
-        var metrics = ctx.measureText(testLine);
-        var testWidth = metrics.width;
-        if (testWidth > maxWidth && n > 0) {
+    var n;
+    for (n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + " ";
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && n > 0) {
             lines.push(line);
-            line = words[n] + ' ';
+            line = words[n] + " ";
             y += lineHeight;
         } else {
             line = testLine;
@@ -148,8 +150,47 @@ function wrapText(text, params) {
         lines.push(line);
     }
 
-    var y = dimensions[1] - (lines.length / 2);
-    for (var n = 0; n < lines.length; n++) {
+    if (ctx.textAlign === "center") {
+        x += maxWidth / 2;
+    }
+
+    y = dimensions[1] + (lineHeight * (lines.length - 1) / 2);
+    for (n = 0; n < lines.length; n++) {
         ctx.fillText(lines[n], x, y+=lineHeight);
+    }
+}
+
+//Images
+var images = {};
+
+async function loadImage(imageSource) {
+    var newImage = new Image();
+    newImage.src = imageSource;
+
+    var loadImage = async img => {
+        return new Promise((resolve, reject) => {
+            img.onload = async () => {
+                console.log("Image Loaded");
+                resolve(true);
+            };
+        });
+    };
+
+    await loadImage(newImage);
+
+    images[imageSource] = newImage;
+}
+
+function drawImage(src, params) {
+    const imageSource = BINDING.conv_string(src).split(" ");
+    const dimensions = toFloatArray(params);
+    var image = images[imageSource];
+
+    if (dimensions.length === 2) {
+        ctx.drawImage(image, dimensions[0], dimensions[1]);
+    } else if (dimensions.length === 4) {
+        ctx.drawImage(image, dimensions[0], dimensions[1], dimensions[2], dimensions[3]);
+    } else if (dimensions.length === 8) {
+        ctx.drawImage(image, dimensions[0], dimensions[1], dimensions[2], dimensions[3], dimensions[4], dimensions[5], dimensions[6], dimensions[7]);
     }
 }

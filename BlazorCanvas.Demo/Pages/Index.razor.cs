@@ -38,11 +38,20 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.FillStyle("black");
             ctx.FillText("Text", 150, 30);
 
+            //TextBox
+            var posX = 200f;
+            var posY = 100f;
+            var width = 250f;
+            var height = 150f;
+            //Rectangle
+            ctx.FillStyle("white");
+            ctx.StrokeRect(posX, posY, width, height);
+
             //Text
             ctx.TextAlign("left");
             ctx.FillStyle("black");
             ctx.Font("10pt Calibri");
-            ctx.WrapText("Space is big. You just won't believe how vastly, hugely, mind-bogglingly big it is. I mean, you may think it's a long way down the road to the chemist's, but that's just peanuts to space.", 150, 60, 300, 50, 15);
+            ctx.WrapText("Space is big. You just won't believe how vastly, hugely, mind-bogglingly big it is. I mean, you may think it's a long way down the road to the chemist's, but that's just peanuts to space.", posX, posY, width, height,15);
 
             //Path
             ctx.StrokeStyle("black");
@@ -73,6 +82,11 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.Polygon(new Vector2[]{ new(100,100), new (120, 120), new (100, 120)});
             ctx.Stroke();
             ctx.Fill();
+            
+            //Image
+            const string imageSource = "lazy.png";
+            await ctx.LoadImage(imageSource);
+            ctx.DrawImage(imageSource, 100, 250);
 
 
             await base.OnAfterRenderAsync(firstRender);
