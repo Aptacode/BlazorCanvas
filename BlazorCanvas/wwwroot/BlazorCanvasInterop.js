@@ -127,36 +127,50 @@ function wrapText(text, params) {
     const lineHeight = dimensions[4];
 
     const lines = [];
-    var hasOverflow = false;
     var n;
     for (n = 0; n < words.length; n++) {
-        const testLine = line + words[n] + " ";
-        const metrics = ctx.measureText(testLine);
-        if (metrics.width > maxWidth && n > 0) {
-            lines.push(line);
-            line = words[n] + " ";
-            y += lineHeight;
+        const nextWord = words[n];
+        const nextLine = line + nextWord + " ";
+        let metrics = ctx.measureText(nextLine);
+        if (metrics.width > maxWidth) {
+            if (line !== "") {
+                lines.push(line);
+            }
+
+            metrics = ctx.measureText(nextWord);
+            if (metrics.width > maxWidth) {
+                let wordSegment = "";
+                let nextWordSegment = "";
+                for (let i = 0; i < nextWord.length; i++) {
+                    metrics = ctx.measureText(wordSegment);
+                    if (metrics.width < maxWidth) {
+                        wordSegment += nextWord[i];
+                    } else {
+                        nextWordSegment += nextWord[i];
+                    }
+                }
+
+                lines.push(wordSegment + "-");
+                line = "";
+                words.insert(n + 1, nextWordSegment);
+            } else {
+                line = nextWord + " ";
+            }
         } else {
-            line = testLine;
-        }
-
-        if (y - dimensions[1] > maxHeight - lineHeight) {
-            hasOverflow = true;
-            break;
+            line = nextLine;
         }
     }
 
-    if (!hasOverflow) {
-        lines.push(line);
-    }
+    lines.push(line);
 
     if (ctx.textAlign === "center") {
         x += maxWidth / 2;
     }
 
-    var middleY = dimensions[1] + maxHeight / 2;
-    y = middleY - (lineHeight * lines.length / 2);
-    for (n = 0; n < lines.length; n++) {
+    const totalLines = Math.min(lines.length, maxHeight / lineHeight);
+    const middleY = dimensions[1] + maxHeight / 2;
+    y = middleY - (lineHeight * totalLines / 2);
+    for (n = 0; n < totalLines; n++) {
         ctx.fillText(lines[n], x, y+=lineHeight);
     }
 }
@@ -195,3 +209,8 @@ function drawImage(src, params) {
         ctx.drawImage(image, dimensions[0], dimensions[1], dimensions[2], dimensions[3], dimensions[4], dimensions[5], dimensions[6], dimensions[7]);
     }
 }
+
+//Helpers 
+Array.prototype.insert = function (index, item) {
+    this.splice(index, 0, item);
+};
