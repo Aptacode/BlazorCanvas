@@ -154,7 +154,8 @@ function wrapText(text, params) {
         x += maxWidth / 2;
     }
 
-    y = dimensions[1] + (lineHeight * (lines.length - 1) / 2);
+    var middleY = dimensions[1] + maxHeight / 2;
+    y = middleY - (lineHeight * lines.length / 2);
     for (n = 0; n < lines.length; n++) {
         ctx.fillText(lines[n], x, y+=lineHeight);
     }

@@ -40,7 +40,7 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
 
             //TextBox
             var posX = 200f;
-            var posY = 100f;
+            var posY = 50f;
             var width = 250f;
             var height = 150f;
             //Rectangle
@@ -48,7 +48,7 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.StrokeRect(posX, posY, width, height);
 
             //Text
-            ctx.TextAlign("left");
+            ctx.TextAlign("center");
             ctx.FillStyle("black");
             ctx.Font("10pt Calibri");
             ctx.WrapText("Space is big. You just won't believe how vastly, hugely, mind-bogglingly big it is. I mean, you may think it's a long way down the road to the chemist's, but that's just peanuts to space.", posX, posY, width, height,15);
