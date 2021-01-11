@@ -2,7 +2,7 @@
 A high performance blazor wrapper around the HTML5 Canvas utilizing unmarshalled JS calls
 
 <p align="center">
-  <img width="640" height="320" src="https://raw.githubusercontent.com/Aptacode/BlazorCanvas/Development/Resources/Images/Banner.jpg">
+  <img width="640" height="320" src="https://raw.githubusercontent.com/Aptacode/BlazorCanvas/Production/Resources/Images/Banner.jpg">
 </p>
 
 [Live Demo](https://aptacode.github.io/BlazorCanvas/)
