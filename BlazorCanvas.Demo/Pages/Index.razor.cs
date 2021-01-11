@@ -84,9 +84,9 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.Fill();
             
             //Image
-            const string imageSource = "lazy.png";
+            const string imageSource = "logo.png";
             await ctx.LoadImage(imageSource);
-            ctx.DrawImage(imageSource, 100, 250);
+            ctx.DrawImage(imageSource, 100, 250, 128,128);
 
 
             await base.OnAfterRenderAsync(firstRender);

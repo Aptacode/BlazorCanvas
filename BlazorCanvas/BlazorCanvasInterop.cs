@@ -151,7 +151,11 @@ namespace Aptacode.BlazorCanvas
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("drawImage", src, new[] { x, y });
         }
-
+        
+        public void DrawImage(string src, float x, float y, float width, float height)
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("drawImage", src, new[] { x, y, width, height });
+        }
         #endregion
     }
 }

@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Aptacode.BlazorCanvas.Demo</RootNamespace>
     <AssemblyName>Aptacode.BlazorCanvas.Demo</AssemblyName>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
