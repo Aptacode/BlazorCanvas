@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Mime;
 using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -9,7 +8,8 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
     public class IndexBase : ComponentBase
     {
         #region Properties
-        public ElementReference Canvas { get; set; }
+        public ElementReference Canvas1 { get; set; }
+        public ElementReference Canvas2 { get; set; }
 
         [Inject] public BlazorCanvasInterop ctx { get; set; }
 
@@ -22,9 +22,11 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
         {
             if (firstRender)
             {
-                await ctx.Register(Canvas);
+                await ctx.Register("Canvas1", Canvas1);
+                await ctx.Register("Canvas2", Canvas2);
             }
 
+            ctx.SelectCanvas("Canvas1");
             //Ellipse
             ctx.LineWidth(2);
             ctx.StrokeStyle("green");
@@ -66,6 +68,8 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.FillStyle("gray");
             ctx.PolyLine(new Vector2[] { new(150, 200), new(130, 230), new(240, 240) });
             ctx.Stroke();
+
+            ctx.SelectCanvas("Canvas2");
 
             //Polygon
             ctx.FillStyle("gray");

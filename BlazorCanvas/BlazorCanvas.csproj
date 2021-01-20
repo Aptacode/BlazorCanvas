@@ -7,9 +7,9 @@
     <LangVersion>9.0</LangVersion>
     <Authors>Aptacode</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.7</Version>
-    <AssemblyVersion>1.0.7</AssemblyVersion>
-    <FileVersion>1.0.7</FileVersion>
+    <Version>1.0.8</Version>
+    <AssemblyVersion>1.0.8</AssemblyVersion>
+    <FileVersion>1.0.8</FileVersion>
     <Product>BlazorCanvas</Product>
     <Description>A high performance blazor wrapper around the HTML5 Canvas</Description>
     <Copyright>GNU General Public License v3.0</Copyright>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>

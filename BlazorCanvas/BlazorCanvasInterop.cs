@@ -17,9 +17,13 @@ namespace Aptacode.BlazorCanvas
             _jsUnmarshalledRuntime = (IJSUnmarshalledRuntime)jsRuntime;
         }
 
-        public async Task Register(ElementReference canvas)
+        public async Task Register(string canvasName, ElementReference canvas)
         {
-            await _jsRuntime.InvokeVoidAsync("registerCanvas", canvas);
+            await _jsRuntime.InvokeVoidAsync("registerCanvas", canvasName, canvas);
+        }
+        public void SelectCanvas(string canvasName)
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<string, object>("selectCanvas", canvasName);
         }
 
         public void Fill()

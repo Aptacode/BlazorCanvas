@@ -1,10 +1,15 @@
 //Canvas
-var canvasElement;
+var ctxs = {};
 var ctx;
 
-function registerCanvas(element) {
-    canvasElement = element;
-    ctx = canvasElement.getContext("2d");
+function registerCanvas(canvasName, canvasElement) {
+    ctxs[canvasName] = canvasElement.getContext("2d");
+    ctx = ctxs[canvasName];
+}
+
+function selectCanvas(param) {
+    const canvasName = BINDING.conv_string(param);
+    ctx = ctxs[canvasName];
 }
 
 //Helpers
