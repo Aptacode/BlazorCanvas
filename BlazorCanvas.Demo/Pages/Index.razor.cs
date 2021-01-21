@@ -27,6 +27,7 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             }
 
             ctx.SelectCanvas("Canvas1");
+
             //Ellipse
             ctx.LineWidth(2);
             ctx.StrokeStyle("green");

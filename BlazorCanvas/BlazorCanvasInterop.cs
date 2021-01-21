@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -6,6 +7,20 @@ using Microsoft.JSInterop;
 
 namespace Aptacode.BlazorCanvas
 {
+    public enum CompositeOperation
+    {
+        SourceOver,
+        SourceAtop,
+        SourceIn,
+        SourceOut,
+        DestinationOver,
+        DestinationAtop,
+        DestinationIn,
+        DestinationOut,
+        Lighter,
+        Copy,
+        Xor,
+    }
     public class BlazorCanvasInterop
     {
         private readonly IJSUnmarshalledRuntime _jsUnmarshalledRuntime;
@@ -25,12 +40,55 @@ namespace Aptacode.BlazorCanvas
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, object>("selectCanvas", canvasName);
         }
+        
+        public void GlobalCompositeOperation(CompositeOperation operation)
+        {
+            var operationName = string.Empty;
+            switch(operation)
+            {
+                case CompositeOperation.SourceOver:
+                    operationName = "source-over";
+                    break;             
+                case CompositeOperation.SourceAtop:
+                    operationName = "source-atop";
+                    break;            
+                case CompositeOperation.SourceIn:
+                    operationName = "source-in";
+                    break;            
+                case CompositeOperation.SourceOut:
+                    operationName = "source-out";
+                    break;            
+                case CompositeOperation.DestinationOver:
+                    operationName = "destination-over";
+                    break;              
+                case CompositeOperation.DestinationAtop:
+                    operationName = "destination-atop";
+                    break;              
+                case CompositeOperation.DestinationIn:
+                    operationName = "destination-in";
+                    break;            
+                case CompositeOperation.DestinationOut:
+                    operationName = "destination-out";
+                    break;             
+                case CompositeOperation.Lighter:
+                    operationName = "lighter";
+                    break;              
+                case CompositeOperation.Copy:
+                    operationName = "copy";
+                    break;             
+                case CompositeOperation.Xor:
+                    operationName = "xor";
+                    break;
+                
+            }
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<string, object>("globalCompositeOperation", operationName);
+        }
 
         public void Fill()
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<object>("fill");
-        }
-
+        }      
+       
         public void Stroke()
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<object>("stroke");

@@ -87,6 +87,11 @@ function polygon(params) {
     ctx.closePath();
 }
 
+function globalCompositeOperation(param) {
+    const operation = BINDING.conv_string(param);
+    ctx.globalCompositeOperation = operation;
+}
+
 function fillStyle(param) {
     const style = BINDING.conv_string(param);
     ctx.fillStyle = style;
