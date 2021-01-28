@@ -36,6 +36,12 @@ namespace Aptacode.BlazorCanvas
         {
             await _jsRuntime.InvokeVoidAsync("registerCanvas", canvasName, canvas);
         }
+        
+        public async Task CreateCanvas(string canvasName, float width, float height)
+        {
+            await _jsRuntime.InvokeVoidAsync("createCanvas", canvasName, width, height);
+        }
+
         public void SelectCanvas(string canvasName)
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, object>("selectCanvas", canvasName);
@@ -218,6 +224,20 @@ namespace Aptacode.BlazorCanvas
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("drawImage", src, new[] { x, y, width, height });
         }
+        #endregion
+
+        #region Canvas
+
+        public void DrawCanvas(string canvasName, float x, float y)
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("drawCanvas", canvasName, new[] { x, y });
+        }
+
+        public void DrawCanvas(string canvasName, float x, float y, float width, float height)
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<string, float[], object>("drawCanvas", canvasName, new[] { x, y, width, height });
+        }
+
         #endregion
     }
 }

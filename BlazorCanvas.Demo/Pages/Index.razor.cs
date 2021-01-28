@@ -30,8 +30,8 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
 
             //Ellipse
             ctx.LineWidth(2);
-            ctx.StrokeStyle("green");
-            ctx.FillStyle("white");
+            ctx.StrokeStyle("blue");
+            ctx.FillStyle("green");
             ctx.Ellipse(40, 40, 30, 30, (float)Math.PI, 0, 2 * (float)Math.PI);
             ctx.Stroke();
             ctx.Fill();
@@ -54,13 +54,13 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
             ctx.TextAlign("center");
             ctx.FillStyle("black");
             ctx.Font("10pt Calibri");
-            ctx.WrapText("Space is big. You just won't believe how vastly, hugely, mind-bogglingly big it is. I mean, you may think it's a long way down the road to the chemist's, but that's just peanuts to space.", posX, posY, width, height,15);
+            ctx.WrapText("Space is big. You just won't believe how vastly, hugely, mind-bogglingly big it is. I mean, you may think it's a long way down the road to the chemist's, but that's just peanuts to space.", posX, posY, width, height, 15);
 
             //Path
             ctx.StrokeStyle("black");
             ctx.LineWidth(4);
             ctx.BeginPath();
-            ctx.MoveTo(100,50);
+            ctx.MoveTo(100, 50);
             ctx.LineTo(75, 80);
             ctx.LineTo(90, 130);
             ctx.Stroke();
@@ -84,15 +84,33 @@ namespace Aptacode.BlazorCanvas.Demo.Pages
 
             //Polygon Fast
             ctx.FillStyle("gray");
-            ctx.Polygon(new Vector2[]{ new(100,100), new (120, 120), new (100, 120)});
+            ctx.Polygon(new Vector2[] { new(100, 100), new(120, 120), new(100, 120) });
             ctx.Stroke();
             ctx.Fill();
-            
-            //Image
-            const string imageSource = "logo.png";
-            await ctx.LoadImage(imageSource);
-            ctx.DrawImage(imageSource, 100, 250, 128,128);
 
+            //Image
+            const string imageSource = "https://raw.githubusercontent.com/Aptacode/AppFramework/Production/Resources/Images/Logo.png";
+            await ctx.LoadImage(imageSource);
+            ctx.DrawImage(imageSource, 100, 250, 128, 128);
+
+            await ctx.CreateCanvas("Temp", 100, 100);
+            ctx.SelectCanvas("Temp");
+            
+            //Ellipse
+            ctx.LineWidth(0);
+            ctx.FillStyle("blue");
+            ctx.Ellipse(50, 50, 30, 30, (float)Math.PI, 0, 2 * (float)Math.PI);
+            ctx.Fill();
+
+            ctx.GlobalCompositeOperation(CompositeOperation.DestinationOut);
+
+            //Ellipse
+            ctx.FillRect(20, 20, 40,40);
+            
+            ctx.GlobalCompositeOperation(CompositeOperation.SourceOver);
+
+            ctx.SelectCanvas("Canvas1");
+            ctx.DrawCanvas("Temp", 0, 0);
 
             await base.OnAfterRenderAsync(firstRender);
         }

@@ -1,10 +1,21 @@
 //Canvas
 var ctxs = {};
+var canvasList = {};
 var ctx;
 
 function registerCanvas(canvasName, canvasElement) {
+    canvasList[canvasName] = canvasElement;
     ctxs[canvasName] = canvasElement.getContext("2d");
-    ctx = ctxs[canvasName];
+}
+
+function createCanvas(canvasName, canvasWidth, canvasHeight) {
+    var canvas = document.createElement("canvas");
+    canvasList[canvasName] = canvas;
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+
+    ctxs[canvasName] = canvas.getContext("2d");
 }
 
 function selectCanvas(param) {
@@ -217,6 +228,21 @@ function drawImage(src, params) {
         ctx.drawImage(image, dimensions[0], dimensions[1], dimensions[2], dimensions[3]);
     } else if (dimensions.length === 8) {
         ctx.drawImage(image, dimensions[0], dimensions[1], dimensions[2], dimensions[3], dimensions[4], dimensions[5], dimensions[6], dimensions[7]);
+    }
+}
+
+function drawCanvas(pCanvasName, pDimensions) {
+    const canvasName = BINDING.conv_string(pCanvasName);
+    const dimensions = toFloatArray(pDimensions);
+
+    var tempCtx = canvasList[canvasName];
+
+    if (dimensions.length === 2) {
+        ctx.drawImage(tempCtx, dimensions[0], dimensions[1]);
+    } else if (dimensions.length === 4) {
+        ctx.drawImage(tempCtx, dimensions[0], dimensions[1], dimensions[2], dimensions[3]);
+    } else if (dimensions.length === 8) {
+        ctx.drawImage(tempCtx, dimensions[0], dimensions[1], dimensions[2], dimensions[3], dimensions[4], dimensions[5], dimensions[6], dimensions[7]);
     }
 }
 
