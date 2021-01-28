@@ -1,5 +1,3 @@
-using System;
-using System.Diagnostics;
 using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -46,7 +44,17 @@ namespace Aptacode.BlazorCanvas
         {
             _jsUnmarshalledRuntime.InvokeUnmarshalled<string, object>("selectCanvas", canvasName);
         }
-        
+
+        public void Save()
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<object>("save");
+        }
+
+        public void Restore()
+        {
+            _jsUnmarshalledRuntime.InvokeUnmarshalled<object>("restore");
+        }
+
         public void GlobalCompositeOperation(CompositeOperation operation)
         {
             var operationName = string.Empty;

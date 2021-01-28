@@ -23,6 +23,14 @@ function selectCanvas(param) {
     ctx = ctxs[canvasName];
 }
 
+function save() {
+    ctx.save();
+}
+
+function restore() {
+    ctx.restore();
+}
+
 //Helpers
 function toFloatArray(input) {
     const m = input + 12;
