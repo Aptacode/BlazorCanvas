@@ -9,7 +9,7 @@ function registerCanvas(canvasName, canvasElement) {
 }
 
 function createCanvas(canvasName, canvasWidth, canvasHeight) {
-    var canvas = document.createElement("canvas");
+    const canvas = document.createElement("canvas");
     canvasList[canvasName] = canvas;
 
     canvas.width = canvasWidth;
@@ -56,7 +56,13 @@ function strokeRect(params) {
 
 function ellipse(params) {
     const dimensions = toFloatArray(params);
-    ctx.ellipse(dimensions[0], dimensions[1], dimensions[2], dimensions[3], dimensions[4], dimensions[5], dimensions[6]);
+    ctx.ellipse(dimensions[0],
+        dimensions[1],
+        dimensions[2],
+        dimensions[3],
+        dimensions[4],
+        dimensions[5],
+        dimensions[6]);
 }
 
 function fill() {
@@ -91,7 +97,7 @@ function polyline(params) {
 
     ctx.moveTo(vertices[0], vertices[1]);
     for (i = 2; i < vertices.length; i += 2) {
-        ctx.lineTo(vertices[i], vertices[i+1]);
+        ctx.lineTo(vertices[i], vertices[i + 1]);
     }
 }
 
@@ -200,7 +206,7 @@ function wrapText(text, params) {
     const middleY = dimensions[1] + maxHeight / 2;
     y = middleY - (lineHeight * totalLines / 2);
     for (n = 0; n < totalLines; n++) {
-        ctx.fillText(lines[n], x, y+=lineHeight);
+        ctx.fillText(lines[n], x, y += lineHeight);
     }
 }
 
@@ -208,7 +214,7 @@ function wrapText(text, params) {
 var images = {};
 
 async function loadImage(imageSource) {
-    var newImage = new Image();
+    const newImage = new Image();
     newImage.src = imageSource;
 
     var loadImage = async img => {
@@ -228,14 +234,22 @@ async function loadImage(imageSource) {
 function drawImage(src, params) {
     const imageSource = BINDING.conv_string(src).split(" ");
     const dimensions = toFloatArray(params);
-    var image = images[imageSource];
+    const image = images[imageSource];
 
     if (dimensions.length === 2) {
         ctx.drawImage(image, dimensions[0], dimensions[1]);
     } else if (dimensions.length === 4) {
         ctx.drawImage(image, dimensions[0], dimensions[1], dimensions[2], dimensions[3]);
     } else if (dimensions.length === 8) {
-        ctx.drawImage(image, dimensions[0], dimensions[1], dimensions[2], dimensions[3], dimensions[4], dimensions[5], dimensions[6], dimensions[7]);
+        ctx.drawImage(image,
+            dimensions[0],
+            dimensions[1],
+            dimensions[2],
+            dimensions[3],
+            dimensions[4],
+            dimensions[5],
+            dimensions[6],
+            dimensions[7]);
     }
 }
 
@@ -243,18 +257,26 @@ function drawCanvas(pCanvasName, pDimensions) {
     const canvasName = BINDING.conv_string(pCanvasName);
     const dimensions = toFloatArray(pDimensions);
 
-    var tempCtx = canvasList[canvasName];
+    const tempCtx = canvasList[canvasName];
 
     if (dimensions.length === 2) {
         ctx.drawImage(tempCtx, dimensions[0], dimensions[1]);
     } else if (dimensions.length === 4) {
         ctx.drawImage(tempCtx, dimensions[0], dimensions[1], dimensions[2], dimensions[3]);
     } else if (dimensions.length === 8) {
-        ctx.drawImage(tempCtx, dimensions[0], dimensions[1], dimensions[2], dimensions[3], dimensions[4], dimensions[5], dimensions[6], dimensions[7]);
+        ctx.drawImage(tempCtx,
+            dimensions[0],
+            dimensions[1],
+            dimensions[2],
+            dimensions[3],
+            dimensions[4],
+            dimensions[5],
+            dimensions[6],
+            dimensions[7]);
     }
 }
 
 //Helpers 
-Array.prototype.insert = function (index, item) {
+Array.prototype.insert = function(index, item) {
     this.splice(index, 0, item);
 };
