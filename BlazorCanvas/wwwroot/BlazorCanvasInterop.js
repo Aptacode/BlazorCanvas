@@ -276,6 +276,12 @@ function drawCanvas(pCanvasName, pDimensions) {
     }
 }
 
+
+function transform(params) {
+    const dimensions = toFloatArray(params);
+    ctx.transform(dimensions[0], dimensions[1], dimensions[2], dimensions[3], dimensions[4], dimensions[5]);
+}
+
 //Helpers 
 Array.prototype.insert = function(index, item) {
     this.splice(index, 0, item);

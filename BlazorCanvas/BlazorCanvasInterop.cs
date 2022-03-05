@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -255,4 +256,9 @@ public class BlazorCanvasInterop
     }
 
     #endregion
+
+    public void Transform(float a, float b, float c, float d, float e, float f)
+    {
+        _jsUnmarshalledRuntime.InvokeUnmarshalled<float[], object>("transform", new[] { a,b,c,d,e,f });
+    }
 }
