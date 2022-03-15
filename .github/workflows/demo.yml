@@ -1,14 +1,17 @@
-name: .NET Core deploy to GitHub pages
+name: demo
 
 env:
-  dotnet_version: 5.0.100
-  project_name: "BlazorCanvas.Demo/BlazorCanvas.Demo.csproj"
+  dotnet_version: 6.0.x
+  project_name: "Demo/Demo.csproj"
   base_href: /BlazorCanvas/
-  target_framework: net5.0
+  target_framework: net6.0
 
 on:
   push:
-    branches: [ Production ]
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+    - 'README.md'
 
 jobs:
   build:
@@ -17,7 +20,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.dotnet_version }}
