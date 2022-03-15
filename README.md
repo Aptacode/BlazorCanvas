@@ -6,7 +6,6 @@
 
 A high performance blazor wrapper around the HTML5 Canvas utilizing unmarshalled JS calls
 
-[![tests](https://github.com/Aptacode/BlazorCanvas/actions/workflows/test.yml/badge.svg)](https://github.com/Aptacode/BlazorCanvas/actions/workflows/test.yml)
 [![demo](https://github.com/Aptacode/BlazorCanvas/actions/workflows/demo.yml/badge.svg)](https://aptacode.github.io/BlazorCanvas/)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/249116ea839b4c689cada11bbc89ab0b)](https://www.codacy.com/gh/Aptacode/BlazorCanvas/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Aptacode/BlazorCanvas&amp;utm_campaign=Badge_Grade)
 [![code metrics](https://github.com/Aptacode/BlazorCanvas/actions/workflows/metrics.yml/badge.svg)](https://github.com/Aptacode/BlazorCanvas/blob/main/CODE_METRICS.md)
