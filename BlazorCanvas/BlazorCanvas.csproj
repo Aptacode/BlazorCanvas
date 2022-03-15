@@ -1,21 +1,36 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>Aptacode.BlazorCanvas</AssemblyName>
-    <RootNamespace>Aptacode.BlazorCanvas</RootNamespace>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Timothy Jones</Authors>
-    <Company>Aptacode</Company>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>Aptacode.BlazorCanvas</AssemblyName>
+		<RootNamespace>Aptacode.BlazorCanvas</RootNamespace>
+		<LangVersion>10.0</LangVersion>
+		<Authors>Aptacode</Authors>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>1.0.14</Version>
+		<AssemblyVersion>1.0.14</AssemblyVersion>
+		<FileVersion>1.0.14</FileVersion>
+		<Product>BlazorCanvas</Product>
+		<Description>A high performance blazor wrapper around the HTML5 Canvas</Description>
+		<Copyright>GNU General Public License v3.0</Copyright>
+		<PackageProjectUrl>https://github.com/Aptacode/BlazorCanvas</PackageProjectUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<ApplicationIcon>logo.ico</ApplicationIcon>
+	</PropertyGroup>
 
-  
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\Resources\Images\logo.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
