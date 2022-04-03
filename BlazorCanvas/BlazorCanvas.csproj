@@ -7,9 +7,9 @@
 		<LangVersion>10.0</LangVersion>
 		<Authors>Aptacode</Authors>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.0.14</Version>
-		<AssemblyVersion>1.0.14</AssemblyVersion>
-		<FileVersion>1.0.14</FileVersion>
+		<Version>1.0.15</Version>
+		<AssemblyVersion>1.0.15</AssemblyVersion>
+		<FileVersion>1.0.15</FileVersion>
 		<Product>BlazorCanvas</Product>
 		<Description>A high performance blazor wrapper around the HTML5 Canvas</Description>
 		<Copyright>GNU General Public License v3.0</Copyright>
