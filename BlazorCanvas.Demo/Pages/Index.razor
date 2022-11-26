@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inherits IndexBase
+<BlazorCanvas @ref="Canvas">
+    <canvas width="@Width" height="@Height"></canvas>
+</BlazorCanvas>
 
-<canvas @ref="Canvas1" width="720" height="480" style="position: absolute"/>
-<canvas @ref="Canvas2" width="720" height="480" style="position: absolute"/>
