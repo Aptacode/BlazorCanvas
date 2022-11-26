@@ -18,45 +18,45 @@ A high performance blazor wrapper around the HTML5 Canvas utilizing unmarshalled
 ![last commit](https://img.shields.io/github/last-commit/Aptacode/BlazorCanvas?style=flat-square&cacheSeconds=86000)
 
 ## Usage
-### index.html
-#### Add the Js script
-```html
-<script src="_content/Aptacode.BlazorCanvas/BlazorCanvasInterop.js"></script>
-```
-
-### Program.cs
-#### Register BlazorCanvas
-```csharp
-  builder.Services.AddSingleton<BlazorCanvasInterop>();
-```
-
 ### RazorComponent.razor
 #### Setup your canvas element
 ```html
-<canvas @ref="Canvas" width="100" height="100"/>
+<BlazorCanvas @ref="Canvas">
+    <canvas width="100" height="100"></canvas>
+</BlazorCanvas>
 ```
 
 ### RazorComponent.razor.cs
-#### Register the canvas with BlazorCanvas
+#### Draw to the canvas!
 ```csharp
-  #region Properties
-  [Inject] public BlazorCanvasInterop BlazorCanvasInterop { get; set; }
-
-  public ElementReference Canvas { get; set; }
-  #endregion
-
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-      if (firstRender)
+    protected BlazorCanvas Canvas { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(15));
+        while (await timer.WaitForNextTickAsync())
+        {
+            await Draw();
+        }
+    }
+ 
+   protected async Task Draw()
+   {
+      if (!Canvas.Ready)
       {
-          await BlazorCanvasInterop.Register(Canvas);
+         return;
       }
-
-      await base.OnAfterRenderAsync(firstRender);
-  }
+      
+      //Clear
+      Canvas.ClearRect(0, 0, Width, Height);
+      
+      //Draw Ellipse
+      Canvas.LineWidth(2);
+      Canvas.StrokeStyle("blue");
+      Canvas.FillStyle("green");
+      Canvas.Ellipse(40, 40, 30, 30, (float)Math.PI, 0, 2 * (float)Math.PI);
+      Canvas.Stroke();
+      Canvas.Fill();
+   }
 
   #endregion
  ```
-
-
-    
