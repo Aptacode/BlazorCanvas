@@ -167,6 +167,15 @@ export function canvas_wrapText(text, x, y, maxWidth, maxHeight, lineHeight) {
 //Images
 var images = {};
 
+export function canvas_drawImageData(x, y, width, height, data) {
+    var imagedata = ctx.createImageData(width, height);
+    var size = width * height * 4;
+    for (var i = 0; i < size; i++) {
+        imagedata.data[i] = data[i];
+    }
+    ctx.putImageData(imagedata, x, y);
+}
+
 export async function canvas_loadImage(imageSource) {
     const newImage = new Image();
     newImage.src = imageSource;

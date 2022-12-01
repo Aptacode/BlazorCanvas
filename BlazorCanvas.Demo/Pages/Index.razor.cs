@@ -99,6 +99,25 @@ public class IndexBase : ComponentBase
 
         Canvas.DrawImage(imageSource, 100, 250, 128, 128);
 
+        int w = 40;
+        int h = 70;
+
+        var rand = new Random();
+        var data = new byte[w * h * 4];
+        // Loop over all of the pixels
+        for (var x = 0; x < w; x++)
+        {
+            for (var y = 0; y < h; y++)
+            {
+                var pixelindex = (y * w + x) * 4;
+
+                data[pixelindex] = (byte)(x % 255);
+                data[pixelindex + 1] = (byte)(y % 255);
+                data[pixelindex + 2] = (byte)(x * y % 255);
+                data[pixelindex + 3] = (byte)255;   // Alpha
+            }
+        }
+        Canvas.DrawImageData(20, 20, w, h, data);
         await InvokeAsync(StateHasChanged);
     }
 }

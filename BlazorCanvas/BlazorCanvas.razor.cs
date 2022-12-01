@@ -4,6 +4,7 @@ using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using System.Numerics;
+using System.ComponentModel.DataAnnotations;
 
 namespace Aptacode.BlazorCanvas
 {
@@ -283,6 +284,13 @@ namespace Aptacode.BlazorCanvas
         }
 
 
+        [JSImport("canvas_drawImageData", "BlazorCanvas")]
+        internal static partial void CanvasDrawImageData(int x, int y, int w, int h, byte[] data);
+        public void DrawImageData(int x, int y, int w, int h, byte[] data)
+        {
+            CanvasDrawImageData(x, y, w, h, data);
+        }
+        
         [JSImport("canvas_drawImage", "BlazorCanvas")]
         internal static partial void CanvasDrawImage(string src, double x, double y, double w, double h);
         public void DrawImage(string src, float x, float y, float width, float height)
