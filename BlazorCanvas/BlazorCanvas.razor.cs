@@ -285,12 +285,26 @@ namespace Aptacode.BlazorCanvas
 
 
         [JSImport("canvas_drawImageData", "BlazorCanvas")]
-        internal static partial void CanvasDrawImageData(int x, int y, int w, int h, byte[] data);
-        public void DrawImageData(int x, int y, int w, int h, byte[] data)
+        internal static partial void CanvasDrawImageData(int x, int y, int w, int h, [JSMarshalAs<JSType.MemoryView>] ArraySegment<byte> data);
+        public void DrawImageData(int x, int y, int w, int h, ArraySegment<byte> data)
         {
             CanvasDrawImageData(x, y, w, h, data);
         }
-        
+
+        [JSImport("canvas_setImageBuffer", "BlazorCanvas")]
+        internal static partial void CanvasSetImagebuffer([JSMarshalAs<JSType.MemoryView>] ArraySegment<Int32> data);
+        public void SetImageBuffer(ArraySegment<Int32> data)
+        {
+            CanvasSetImagebuffer(data);
+        }
+
+        [JSImport("canvas_drawImageBuffer", "BlazorCanvas")]
+        internal static partial void CanvasDrawImageBuffer(int x, int y, int w, int h);
+        public void DrawImageBuffer(int x, int y, int w, int h)
+        {
+            CanvasDrawImageBuffer(x, y, w, h);
+        }
+
         [JSImport("canvas_drawImage", "BlazorCanvas")]
         internal static partial void CanvasDrawImage(string src, double x, double y, double w, double h);
         public void DrawImage(string src, float x, float y, float width, float height)

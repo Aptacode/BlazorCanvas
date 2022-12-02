@@ -167,17 +167,33 @@ export function canvas_wrapText(text, x, y, maxWidth, maxHeight, lineHeight) {
 //Images
 var images = {};
 
+var imageBuffer;
+export function canvas_setImageBuffer(data) {
+    imageBuffer = data;
+}
+
+export function canvas_drawImageBuffer(x, y, width, height) {
+    var buf = new ArrayBuffer(width * height * 4);
+    var buf8 = new Uint8ClampedArray(buf);
+    var data = new Uint32Array(buf);
+
+    data.set(imageBuffer.slice());
+
+    var imageData = new ImageData(buf8, width, height);
+
+    ctx.putImageData(imageData, x, y);
+}
+
 export function canvas_drawImageData(x, y, width, height, data) {
-    var imagedata = ctx.createImageData(width, height);
-    var size = width * height * 4;
-    for (var i = 0; i < size; i++) {
-        imagedata.data[i] = data[i];
-    }
-    ctx.putImageData(imagedata, x, y);
+    const clamped = new Uint8ClampedArray(data.slice());
+    const image = new ImageData(clamped, width, height);
+    ctx.putImageData(image, x, y);
+    data.dispose();
 }
 
 export async function canvas_loadImage(imageSource) {
     const newImage = new Image();
+
     newImage.src = imageSource;
 
     var loadImage = async img => {

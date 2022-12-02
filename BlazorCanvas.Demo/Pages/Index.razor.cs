@@ -13,9 +13,37 @@ public class IndexBase : ComponentBase
     protected int Height => 600;
 
     private bool _imageLoaded = false;
+    const int w = 100;
+    const int h = 100;
+    ArraySegment<int> data = new int[w * h];
+
     protected override async Task OnInitializedAsync()
     {
         using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(15));
+
+        while (Canvas is not { Ready : true })
+        {
+            await Task.Delay(10);
+        }
+
+        for (var x = 0; x < w; x++)
+        {
+            for (var y = 0; y < h; y++)
+            {
+                var r = (byte)(x % 255);
+                var g = (byte)(y % 255);
+                var b = (byte)(x * y % 255);
+                data[y * w + x] =
+                        (255 << 24) |
+                        (b << 16) |
+                        (g << 8) | 
+                         r;
+            }
+        }
+
+
+        Canvas.SetImageBuffer(data);
+
         while (await timer.WaitForNextTickAsync())
         {
             await Draw();
@@ -24,10 +52,7 @@ public class IndexBase : ComponentBase
 
     protected async Task Draw()
     {
-        if (!Canvas.Ready)
-        {
-            return;
-        }
+
         Canvas.ClearRect(0, 0, Width, Height);
         //Ellipse
         Canvas.LineWidth(2);
@@ -99,25 +124,26 @@ public class IndexBase : ComponentBase
 
         Canvas.DrawImage(imageSource, 100, 250, 128, 128);
 
-        int w = 40;
-        int h = 70;
-
         var rand = new Random();
-        var data = new byte[w * h * 4];
-        // Loop over all of the pixels
+
         for (var x = 0; x < w; x++)
         {
             for (var y = 0; y < h; y++)
             {
-                var pixelindex = (y * w + x) * 4;
+                var r = (byte)(rand.Next(255));
+                var g = (byte)(y % 255);
+                var b = (byte)(x * y % 255);
+                var a = (byte)255;
 
-                data[pixelindex] = (byte)(x % 255);
-                data[pixelindex + 1] = (byte)(y % 255);
-                data[pixelindex + 2] = (byte)(x * y % 255);
-                data[pixelindex + 3] = (byte)255;   // Alpha
+                data[y * w + x] =
+                        (255 << 24) |    // alpha
+                        (b << 16) |    // blue
+                        (g << 8) |    // green
+                         r;            // red
             }
         }
-        Canvas.DrawImageData(20, 20, w, h, data);
+
+        Canvas.DrawImageBuffer(300, 300, w, h);
         await InvokeAsync(StateHasChanged);
     }
 }
