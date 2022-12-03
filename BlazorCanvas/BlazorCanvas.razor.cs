@@ -90,19 +90,10 @@ namespace Aptacode.BlazorCanvas
         }
 
         [JSImport("canvas_polygon", "BlazorCanvas")]
-        internal static partial void CanvasPolygon([JSMarshalAs<JSType.MemoryView>] Span<double> verticies);
-        public void Polygon(Span<Vector2> vertices)
+        internal static partial void CanvasPolygon(double[] verticies);
+        public void Polygon(double[] vertices)
         {
-            Span<double> floats = new double[vertices.Length * 2];
-            var floatCount = 0;
-            for (var i = 0; i < vertices.Length; i++)
-            {
-                var vertex = vertices[i];
-                floats[floatCount++] = vertex.X;
-                floats[floatCount++] = vertex.Y;
-            }
-
-            CanvasPolygon(floats);
+            CanvasPolygon(vertices);
         }
 
         [JSImport("canvas_fillRect", "BlazorCanvas")]
@@ -175,18 +166,10 @@ namespace Aptacode.BlazorCanvas
         }
 
         [JSImport("canvas_polyline", "BlazorCanvas")]
-        internal static partial void CanvasPolyLine([JSMarshalAs<JSType.MemoryView>] Span<double> vertices);
-        public void PolyLine(Span<Vector2> vertices)
+        internal static partial void CanvasPolyLine(double[] vertices);
+        public void PolyLine(double[] vertices)
         {
-            Span<double> floats = new double[vertices.Length * 2];
-            var floatCount = 0;
-            for (var i = 0; i < vertices.Length; i++)
-            {
-                var vertex = vertices[i];
-                floats[floatCount++] = vertex.X;
-                floats[floatCount++] = vertex.Y;
-            }
-            CanvasPolyLine(floats);
+            CanvasPolyLine(vertices);
         }
 
         public void GlobalCompositeOperation(CompositeOperation operation)

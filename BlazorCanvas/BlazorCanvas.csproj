@@ -5,9 +5,9 @@
     <AssemblyName>Aptacode.BlazorCanvas</AssemblyName>
     <RootNamespace>Aptacode.BlazorCanvas</RootNamespace>
     <Authors>Aptacode</Authors>
-    <Version>1.1.6</Version>
-    <AssemblyVersion>1.1.6</AssemblyVersion>
-    <FileVersion>1.1.6</FileVersion>
+    <Version>1.1.7</Version>
+    <AssemblyVersion>1.1.7</AssemblyVersion>
+    <FileVersion>1.1.7</FileVersion>
     <Product>BlazorCanvas</Product>
     <Description>A high performance blazor wrapper around the HTML5 Canvas</Description>
     <Copyright>GNU General Public License v3.0</Copyright>

@@ -61,28 +61,23 @@ export function canvas_lineTo(x, y) {
     ctx.lineTo(x, y);
 }
 
-export function canvas_polyline(data) {
+export function canvas_polyline(vertices) {
     ctx.beginPath();
-    const vertices = data.slice();
 
     ctx.moveTo(vertices[0], vertices[1]);
     for (var i = 2; i < vertices.length; i += 2) {
         ctx.lineTo(vertices[i], vertices[i + 1]);
     }
-    data.dispose();
 }
 
-export function canvas_polygon(data) {
+export function canvas_polygon(vertices) {
     ctx.beginPath();
-
-    const vertices = data.slice();
 
     ctx.moveTo(vertices[0], vertices[1]);
     for (var i = 2; i < vertices.length; i += 2) {
         ctx.lineTo(vertices[i], vertices[i + 1]);
     }
     ctx.closePath();
-    data.dispose();
 }
 
 export function canvas_globalCompositeOperation(operation) {

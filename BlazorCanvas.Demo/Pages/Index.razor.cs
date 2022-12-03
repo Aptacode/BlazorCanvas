@@ -93,7 +93,7 @@ public class IndexBase : ComponentBase
 
         //Polyline Fast
         Canvas.FillStyle("gray");
-        Canvas.PolyLine(new Vector2[] { new(150, 200), new(130, 230), new(240, 240) });
+        Canvas.PolyLine(new double[] { 150, 200, 130, 230, 240, 240 });
         Canvas.Stroke();
 
         //Polygon
@@ -108,7 +108,7 @@ public class IndexBase : ComponentBase
 
         //Polygon Fast
         Canvas.FillStyle("gray");
-        Canvas.Polygon(new Vector2[] { new(100, 100), new(120, 120), new(100, 120) });
+        Canvas.Polygon(new double[] { 100, 100, 120, 120, 100, 120 });
         Canvas.Stroke();
         Canvas.Fill();
 
