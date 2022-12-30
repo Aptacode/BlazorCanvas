@@ -5,6 +5,10 @@ export function canvas_register(divElement) {
     ctx = divElement.querySelector('canvas').getContext("2d");
 }
 
+export function canvas_rotate(angle) {
+    ctx.rotate(angle);
+}
+
 export function canvas_save() {
     ctx.save();
 }

@@ -58,6 +58,13 @@ namespace Aptacode.BlazorCanvas
             CanvasRestore();
         }
 
+        [JSImport("canvas_rotate", "BlazorCanvas")]
+        internal static partial void CanvasRotate(float angle);
+        public void Rotate(float angle)
+        {
+            CanvasRotate(angle);
+        }
+
         [JSImport("canvas_fill", "BlazorCanvas")]
         internal static partial void CanvasFill();
         public void Fill()

@@ -37,6 +37,8 @@ public class IndexBase : ComponentBase
 
     protected async Task Draw()
     {
+        //_mandelbrot.RenderImage(data, w, h, HighResolution);
+        //Canvas.DrawImageBuffer(0, 0, w, h);
 
         Canvas.ClearRect(0, 0, Width, Height);
         //Ellipse
@@ -107,10 +109,9 @@ public class IndexBase : ComponentBase
             await Canvas.LoadImage(imageSource);
         }
 
+        Canvas.Rotate(20 * (float)Math.PI/180f);
         Canvas.DrawImage(imageSource, 100, 250, 128, 128);
-
-        _mandelbrot.RenderImage(data, w, h, HighResolution);
-        Canvas.DrawImageBuffer(0, 0, w, h);
+        Canvas.Rotate(-20 * (float)Math.PI / 180f);
 
         await InvokeAsync(StateHasChanged);
     }
