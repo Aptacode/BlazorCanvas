@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inherits IndexBase
+<button @onmousedown="MouseDown" @onmouseup="MouseUp" />
 <BlazorCanvas @ref="Canvas">
     <canvas width="@Width" height="@Height"></canvas>
 </BlazorCanvas>

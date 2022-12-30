@@ -215,6 +215,11 @@ export function canvas_drawImage(src, x, y, w, h) {
     ctx.drawImage(image, x, y, w, h);
 }
 
+export function canvas_drawImagePortion(src, sx, sy, sw, sh, dx, dy, dw, dh) {
+    const image = images[src];
+    ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh,);
+}
+
 export function canvas_transform(a, b, c, d, e, f) {
     ctx.transform(a, b, c, d, e, f);
 }

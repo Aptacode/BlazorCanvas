@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -9,13 +8,15 @@ namespace Aptacode.BlazorCanvas.Demo.Pages;
 public class IndexBase : ComponentBase
 {
     protected BlazorCanvas Canvas { get; set; }
-    protected int Width => 600;
-    protected int Height => 600;
+    protected int Width => 1000;
+    protected int Height => 1000;
 
     private bool _imageLoaded = false;
-    const int w = 100;
-    const int h = 100;
+    const int w = 400;
+    const int h = 400;
     ArraySegment<int> data = new int[w * h];
+
+    private readonly Mandelbrot _mandelbrot = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -25,22 +26,6 @@ public class IndexBase : ComponentBase
         {
             await Task.Delay(10);
         }
-
-        for (var x = 0; x < w; x++)
-        {
-            for (var y = 0; y < h; y++)
-            {
-                var r = (byte)(x % 255);
-                var g = (byte)(y % 255);
-                var b = (byte)(x * y % 255);
-                data[y * w + x] =
-                        (255 << 24) |
-                        (b << 16) |
-                        (g << 8) | 
-                         r;
-            }
-        }
-
 
         Canvas.SetImageBuffer(data);
 
@@ -124,26 +109,20 @@ public class IndexBase : ComponentBase
 
         Canvas.DrawImage(imageSource, 100, 250, 128, 128);
 
-        var rand = new Random();
+        _mandelbrot.RenderImage(data, w, h, HighResolution);
+        Canvas.DrawImageBuffer(0, 0, w, h);
 
-        for (var x = 0; x < w; x++)
-        {
-            for (var y = 0; y < h; y++)
-            {
-                var r = (byte)(rand.Next(255));
-                var g = (byte)(y % 255);
-                var b = (byte)(x * y % 255);
-                var a = (byte)255;
-
-                data[y * w + x] =
-                        (255 << 24) |    // alpha
-                        (b << 16) |    // blue
-                        (g << 8) |    // green
-                         r;            // red
-            }
-        }
-
-        Canvas.DrawImageBuffer(300, 300, w, h);
         await InvokeAsync(StateHasChanged);
+    }
+
+    public bool HighResolution { get; set; }
+    public void MouseDown()
+    {
+        HighResolution = true;
+    }
+
+    public void MouseUp()
+    {
+        HighResolution = false;
     }
 }

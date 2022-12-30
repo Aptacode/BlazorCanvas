@@ -294,6 +294,13 @@ namespace Aptacode.BlazorCanvas
             CanvasDrawImage(src, x, y, width, height);
         }
 
+        [JSImport("canvas_drawImagePortion", "BlazorCanvas")]
+        internal static partial void CanvasDrawImagePortion(string src, double sx, double sy, double sw, double sh, double dx, double dy, double dw, double dh);
+        public void DrawImage(string src, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
+        {
+            CanvasDrawImagePortion(src, sx, sy, sw, sh, dx, dy, dw, dh);
+        }
+
         #endregion
     }
 }
