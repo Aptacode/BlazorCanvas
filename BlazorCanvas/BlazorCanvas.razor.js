@@ -9,6 +9,14 @@ export function canvas_rotate(angle) {
     ctx.rotate(angle);
 }
 
+export function canvas_translate(x, y) {
+    ctx.translate(x, y);
+}
+
+export function canvas_scale(scale) {
+    ctx.scale(scale);
+}
+
 export function canvas_save() {
     ctx.save();
 }
